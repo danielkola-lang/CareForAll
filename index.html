@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareForAll - Quality Healthcare, Anytime, for Everyone</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="a11y-bar">
+        <div class="a11y-container">
+            <span class="a11y-label">♿ Accessibility Controls:</span>
+            <div class="a11y-actions">
+                <button id="btn-decrease-text" class="btn-a11y" title="Decrease Text Size">A-</button>
+                <button id="btn-increase-text" class="btn-a11y" title="Increase Text Size">A+</button>
+                <button id="btn-toggle-contrast" class="btn-a11y" title="Toggle Contrast">Toggle High Contrast 🌓</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="emergency-modal" class="modal hidden">
+        <div class="modal-content">
+            <span id="close-modal" class="close-btn" aria-label="Close dialog">&times;</span>
+            <h2 class="emergency-title">EMERGENCY CONTACTS</h2>
+            <p class="emergency-warning">If you are facing a life-threatening medical emergency, please call local emergency services immediately.</p>
+            <div class="emergency-numbers">
+                <div class="emergency-card">
+                    <h3>General Emergency</h3>
+                    <p class="phone-num">911</p>
+                </div>
+                <div class="emergency-card">
+                    <h3>Mental Health Crisis</h3>
+                    <p class="phone-num">988</p>
+                </div>
+                <div class="emergency-card">
+                    <h3>Poison Control</h3>
+                    <p class="phone-num">1-800-222-1222</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="confirm-modal" class="modal hidden">
+        <div class="modal-content text-center">
+            <span id="close-confirm-modal" class="close-btn">&times;</span>
+            <div class="confirm-icon">🎉</div>
+            <h2 id="confirm-modal-title">Action Successful!</h2>
+            <p id="confirm-modal-message">Your action has been recorded securely.</p>
+            <button id="btn-confirm-ok" class="btn btn-primary" style="margin-top: 20px; width: 120px;">Got it!</button>
+        </div>
+    </div>
+
+    <header id="main-header" class="hidden">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <span class="logo-icon">💚</span>
+                <div class="brand-text">
+                    <h1>CareForAll</h1>
+                    <span class="tagline">Quality healthcare, anytime, for everyone.</span>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="nav-link active" data-section="home-section">Home</a></li>
+                <li><a href="#" class="nav-link" data-section="locator-section">Find Care</a></li>
+                <li><a href="#" class="nav-link" data-section="booking-section">Book Appointment</a></li>
+                <li><a href="#" class="nav-link" data-section="reminder-section">Reminders</a></li>
+                <li><a href="#" class="nav-link" data-section="tips-section">Health Tips</a></li>
+            </ul>
+            <div class="nav-right">
+                <span id="welcome-message">Welcome!</span>
+                <button id="emergency-btn" class="btn-emergency">EMERGENCY</button>
+                <button id="logout-btn" class="btn-secondary">Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <div id="toast-container"></div>
+
+    <main class="container">
+        
+        <section id="auth-section" class="auth-wrapper">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <span class="logo-large" aria-hidden="true">💚</span>
+                    <h2>Welcome to CareForAll</h2>
+                    <p>Ensuring Quality Healthcare for Everyone (SDG 3)</p>
+                </div>
+                
+                <div class="auth-tabs">
+                    <button id="tab-login" class="auth-tab active">Login</button>
+                    <button id="tab-signup" class="auth-tab">Sign Up</button>
+                </div>
+
+                <form id="login-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="login-email">Email Address</label>
+                        <input type="email" id="login-email" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" required placeholder="Enter your password">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Login Securely</button>
+                    
+                    <div class="divider"><span>OR</span></div>
+                    
+                    <button type="button" id="guest-btn" class="btn btn-secondary btn-block">Explore as Guest</button>
+                </form>
+
+                <form id="signup-form" class="auth-form hidden">
+                    <div class="form-group">
+                        <label for="signup-name">Full Name</label>
+                        <input type="text" id="signup-name" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email Address</label>
+                        <input type="email" id="signup-email" required placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" required placeholder="Create a password">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+                </form>
+                
+                <p class="privacy-note-sm">🔒 Your health data is safe. We store your credentials locally on your device.</p>
+            </div>
+        </section>
+
+        <section id="home-section" class="app-section hidden">
+            <div class="hero">
+                <h2>Achieving Universal Health Coverage</h2>
+                <p>Sustainable Development Goal 3 aims to ensure healthy lives and promote well-being for all at all ages. CareForAll helps you easily find doctors, schedule appointments, set medicine reminders, and learn verified health tips in one secure place.</p>
+            </div>
+
+            <div class="grid">
+                <div class="card card-interactive" data-target="locator-section" tabindex="0">
+                    <span class="card-icon" aria-hidden="true">📍</span>
+                    <h3>Find Nearby Care</h3>
+                    <p>Locate trusted local hospitals, clinics, and pharmacies in your area instantly.</p>
+                </div>
+                <div class="card card-interactive" data-target="booking-section" tabindex="0">
+                    <span class="card-icon" aria-hidden="true">📅</span>
+                    <h3>Book Appointments</h3>
+                    <p>Schedule visits with healthcare professionals and receive instant confirmations.</p>
+                </div>
+                <div class="card card-interactive" data-target="reminder-section" tabindex="0">
+                    <span class="card-icon" aria-hidden="true">⏰</span>
+                    <h3>Pills & Vaccines</h3>
+                    <p>Set custom reminders for your medications and immunizations to stay on track.</p>
+                </div>
+                <div class="card card-interactive" data-target="tips-section" tabindex="0">
+                    <span class="card-icon" aria-hidden="true">💡</span>
+                    <h3>Health Tips Hub</h3>
+                    <p>Access trusted guidelines on physical, nutritional, and mental well-being.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="locator-section" class="app-section hidden">
+            <div class="section-header">
+                <h2>Find Nearby Healthcare Facilities</h2>
+                <p>Search or filter verified medical centers near you.</p>
+            </div>
+            
+            <div class="filter-controls">
+                <div class="filter-group">
+                    <label for="facility-filter">Filter by Type:</label>
+                    <select id="facility-filter" class="form-control select-filter">
+                        <option value="all">All Facilities</option>
+                        <option value="hospital">Hospitals</option>
+                        <option value="clinic">Clinics</option>
+                        <option value="pharmacy">Pharmacies</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="facility-search">Search by Name:</label>
+                    <input type="text" id="facility-search" class="form-control" placeholder="Type to search facilities...">
+                </div>
+            </div>
+
+            <div id="locator-list" class="grid grid-3">
+                </div>
+        </section>
+
+        <section id="booking-section" class="app-section hidden">
+            <div class="section-header">
+                <h2>Book a Medical Appointment</h2>
+                <p>Fill out the form below to book a consultation with your preferred facility.</p>
+            </div>
+
+            <div class="booking-container">
+                <form id="booking-form" class="card form-card">
+                    <div class="form-group">
+                        <label for="book-facility">Select Healthcare Facility</label>
+                        <select id="book-facility" class="form-control" required>
+                            </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="book-date">Preferred Date</label>
+                            <input type="date" id="book-date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="book-time">Preferred Time Slot</label>
+                            <select id="book-time" class="form-control" required>
+                                <option value="">Select a time</option>
+                                <option value="09:00 AM">09:00 AM</option>
+                                <option value="11:00 AM">11:00 AM</option>
+                                <option value="02:00 PM">02:00 PM</option>
+                                <option value="04:00 PM">04:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="book-reason">Reason for Visit</label>
+                        <textarea id="book-reason" class="form-control" rows="3" placeholder="Describe symptoms or purpose of appointment" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Submit Appointment Booking</button>
+                </form>
+
+                <div class="appointments-list-container">
+                    <h3>Your Scheduled Appointments</h3>
+                    <div id="appointments-list">
+                        <p class="empty-text">No upcoming appointments scheduled yet.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="reminder-section" class="app-section hidden">
+            <div class="section-header">
+                <h2>Medicine & Vaccination Reminders</h2>
+                <p>Never miss a dose. Set easy daily schedules and vaccination timelines.</p>
+            </div>
+
+            <div class="reminder-container">
+                <form id="reminder-form" class="card form-card">
+                    <div class="form-group">
+                        <label for="reminder-name">Medication / Vaccine Name</label>
+                        <input type="text" id="reminder-name" class="form-control" placeholder="e.g., Vitamin D, Flu Shot" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="reminder-type">Type</label>
+                            <select id="reminder-type" class="form-control" required>
+                                <option value="Daily Pill">Daily Pill</option>
+                                <option value="Weekly Pill">Weekly Pill</option>
+                                <option value="Vaccination">Vaccination</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="reminder-time">Scheduled Time</label>
+                            <input type="time" id="reminder-time" class="form-control" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Add Alert Reminder</button>
+                </form>
+
+                <div class="reminders-list-container">
+                    <h3>Active Reminders</h3>
+                    <div id="reminders-list">
+                        </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tips-section" class="app-section hidden">
+            <div class="section-header">
+                <h2>Trusted Health Tips & Resources</h2>
+                <p>Empowering you with scientific knowledge to lead a healthier life.</p>
+            </div>
+
+            <div class="tips-layout">
+                <div class="tips-tabs">
+                    <button class="tips-tab active" data-category="diseases">🦠 Preventative Health</button>
+                    <button class="tips-tab" data-category="nutrition">🥗 Nutrition & Diet</button>
+                    <button class="tips-tab" data-category="exercise">🏃‍♂️ Fitness & Activity</button>
+                    <button class="tips-tab" data-category="mental">🧠 Mental Well-being</button>
+                </div>
+
+                <div class="tips-content card">
+                    <div id="tips-display-area">
+                        </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 CareForAll App. Built for SDG Goal 3: Good Health & Well-being.</p>
+            <p class="privacy-disclaimer">🔒 <strong>Privacy Assurance:</strong> CareForAll operates purely locally. Your medical selections, forms, and profiles are stored securely only inside your browser environment and are never sent to external servers.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
